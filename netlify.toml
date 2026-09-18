@@ -1,0 +1,23 @@
+# إعدادات Netlify — Next.js 16 (App Router)
+# المستودع: https://github.com/hasonae/shatlet
+
+[build]
+  # يبني Next.js (يولد .next)
+  command = "next build"
+  # المجلد المُنشور
+  publish = ".next"
+
+# المكوّن الإضافي الرسمي لـ Next.js على Netlify
+# (يدعم ISR / Dynamic Rendering / Image Optimization / Middleware).
+# لا يلزم إضافته إلى package.json — يثبتها Netlify تلقائيًا.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# تمرير متغيّرات البيئة في واجهة Netlify:
+#   Project settings → Environment variables → Add variable
+#   DATABASE_URL = postgresql://<user>:<pass>@<host>:5432/<db>
+#
+# ملحوظة مهمّة: إذا استضفت البناء على Netlify، لا يعمل 127.0.0.1 —
+# عيّن DATABASE_URL إلى قاعدة بيانات سحابية حقيقية (مثلاً Neon/Supabase).
+# الصفحة الرئيسية تتعامل مع فشل الاتصال عبر .catch()، لكن /studio والواجهة
+# ستُرجع 500 إذا لم تُوفّر قاعدة بيانات صالحة.
